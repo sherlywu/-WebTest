@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
@@ -31,6 +32,16 @@ class CreateTopicPage(BasePage):
 
         self.driver.find_element_by_xpath('//*[@value="提交"]').click()
 
+    def reply_topic(self, content):
+        rep_content_input = self.driver.find_element(By.XPATH, '//div[@class="CodeMirror-code"]/pre')
+        rep_content_input.click()
+
+        ac = ActionChains(self.driver)  # 模拟鼠标的方式输入（不是input标签的输入框使用这个方式）
+        ac.move_to_element(rep_content_input).send_keys(content).perform()
+
+        self.driver.find_element_by_xpath('//*[@class="span-primary submit_btn"]').click()
+
+
 if __name__ == '__main__':
     hp = HomePage()
     hp.click_link_new_page_by_text('登录')
@@ -38,4 +49,4 @@ if __name__ == '__main__':
     lp.user_login_with_username_password('fanmao1', '123456')
     hp.click_create_topic_btn()
     cp = CreateTopicPage()
-    cp.create_topic_contents('分享', '赵老师很帅', '从0到1搭建自动化测试框架')
+    cp.create_topic_contents('分享', 'web自动化测试', '从0到1搭建自动化测试框架')

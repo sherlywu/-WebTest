@@ -14,3 +14,6 @@ class TopicDetailPage(BasePage):
 
     def get_content_text(self):
         return self.driver.find_element(By.XPATH, '//div[@class="topic_content"]').text
+
+    def get_reply_topic_text(self):
+        return self.driver.find_element(By.XPATH, '//div[@class="reply_content from-fanmao1"]//p').text

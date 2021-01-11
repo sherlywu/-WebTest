@@ -20,10 +20,16 @@ class HomePage(BasePage):
         :param index: 0表示第一个话题
         :return:
         """
-        pass
+        eles = self.driver.find_elements(By.XPATH, '//div[@id="topic_list"]//a[@class="topic_title"]')
+        for i in range(len(eles)):
+            return eles[index].click()
 
-if __name__=='__main__':
+
+
+if __name__ == '__main__':
     hp = HomePage()
     hp.click_link_new_page_by_text('登录')
     hp.click_link_new_page_by_text('注册')
     hp.click_link_new_page_by_text('首页')
+    cp = HomePage()
+    cp.click_topic_link_by_index(index=5)

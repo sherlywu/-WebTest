@@ -38,11 +38,11 @@ if __name__ == '__main__':
     # runner = unittest.TextTestRunner(verbosity=2) # 设置相信日志信息
 
     # 设置测试用例集
-    suite = sample_testing()
+    suite = regression_testing()
     # runner.run(suite)
     runner = BeautifulReport(suite)
     import os
-    reports = os.path.join(os.path.dirname(__file__),'reports')
+    reports = os.path.join(os.path.dirname(__file__), 'reports')
     if not os.path.exists(reports):
         os.mkdir(reports)
     import time
